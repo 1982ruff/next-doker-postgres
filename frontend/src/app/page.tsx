@@ -77,7 +77,7 @@ export default function Home() {
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <div className="space-y-4 w-full max-w-2xl">
         <h1 className="text-2xl font-bold text-gray-800 text-center">
-          User Management App
+          Добавление пользователей в группы
         </h1>
 
         {/* Form to add new user */}
