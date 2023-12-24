@@ -7,7 +7,7 @@ import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
 
 const Header = () => {
   return (
-    <header className="flex border-b flex-row py-7 justify-between items-center">
+    <header className="flex border-b px-20 flex-row py-7 justify-between items-center">
       <Logo />
       <nav>
         <Menu />

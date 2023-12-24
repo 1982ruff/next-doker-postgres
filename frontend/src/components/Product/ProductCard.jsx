@@ -2,7 +2,6 @@
 import Image from "next/image";
 import H6 from "../Headings/H6";
 import { useState } from "react";
-import { motion } from "framer-motion";
 
 const ProductCard = ({ title, image, price }) => {
   const [show, setShow] = useState(false);
@@ -13,11 +12,11 @@ const ProductCard = ({ title, image, price }) => {
       onMouseLeave={() => setShow(false)}
       className="justify-center cursor-pointer relative  flex items-center flex-col gap-y-3 rounded-xl "
     >
-      <div className="bg-Lynx_White  w-full h-[420px] rounded-lg flex justify-center items-center">
+      <div className="bg-Lynx_White w-full h-full rounded-lg flex justify-center items-center">
         <Image
           src={image}
           alt={title}
-          className="duration-150 ease-in-out transition-transform hover:scale-110"
+          className="duration-150 scale-75 ease-in-out transition-transform hover:scale-90"
         />
       </div>
       <div className="text-start place-self-start px-4 mt-2">
@@ -56,7 +55,7 @@ const ProductCard = ({ title, image, price }) => {
               />
             </svg>
           </button>
-          <button className=" absolute bottom-20  group right-4 bg-Satoimo_Brown w-10 h-10 flex justify-center items-center rounded-lg">
+          <button className=" absolute bottom-24 lg:bottom-20 group right-4 bg-Satoimo_Brown w-10 h-10 flex justify-center items-center rounded-lg">
             <svg
               width="24"
               height="24"

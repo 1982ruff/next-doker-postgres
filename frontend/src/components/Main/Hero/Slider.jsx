@@ -14,21 +14,21 @@ const Slider = () => {
     <Swiper
       slidesPerView={1}
       modules={[Navigation, Pagination, A11y]}
-      className="flex relative rounded-lg"
+      className="flex relative h-[500px] rounded-lg"
     >
       {SLIDES.map((item, idx) => (
         <SwiperSlide
           key={idx}
-          className="rounded-lg relative overflow-hidden flex justify-center items-center"
+          className="rounded-lg  relative overflow-hidden flex justify-center items-center"
         >
           <Image
             src={item.image}
             alt={item.title}
-            className=" rounded-lg w-full h-full object-cover"
+            className=" rounded-lg w-full h-full object-cover object-center"
           />
 
-          <div className="flex flex-col gap-10 absolute px-52 top-[50%] translate-y-[-50%] left-0 ">
-            <div className="w-[652px]">
+          <div className="flex flex-col gap-10 absolute px-28 lg:px-52 top-[50%] translate-y-[-50%] left-0 ">
+            <div className="lg:w-[652px]">
               <H1 textColor="#000">{item.title}</H1>
             </div>
             <Button link={item.link}>Shop now</Button>

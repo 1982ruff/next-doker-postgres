@@ -17,24 +17,24 @@ export default function Home() {
       <Promo />
 
       {/* Categories */}
-      <section className="px-20 text-center">
+      <section className="lg:px-20 px-10 text-center">
         <SectionDivider title={"Categories"} />
         <Category />
       </section>
 
       {/* New Products */}
-      <section className="px-20 text-center">
+      <section className="lg:px-20 px-10 text-center">
         <SectionDivider title={"New Products"} />
         <NewProducts />
       </section>
 
       {/* Match Furniture Styles Banner*/}
-      <section className="px-20 text-center">
+      <section className="lg:px-20 px-10 text-center">
         <Banner />
       </section>
 
       {/* Products of the week */}
-      <section className="px-20 text-center">
+      <section className="lg:px-20 px-10 text-center">
         <SectionDivider title={"Products of the week"} />
         <ProductOfTheWeek />
       </section>
@@ -46,10 +46,10 @@ export default function Home() {
       <Brands />
 
       {/* Recent Blogs */}
-      <section className="px-20 text-center">
+      {/* <section className="px-20 text-center">
         <SectionDivider title={"Recent Blogs"} />
         <RecentBlogs />
-      </section>
+      </section> */}
     </main>
   );
 }

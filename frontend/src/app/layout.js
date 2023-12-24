@@ -14,9 +14,9 @@ export default function RootLayout({ children }) {
     <html lang="ru">
       <body className={` max-w-[1920px] mx-auto ${nunito_sans.className}`}>
         <TooltipProvider>
-          <Header />
+          {/* <Header /> */}
           {children}
-          <Footer />
+          {/* <Footer /> */}
         </TooltipProvider>
       </body>
     </html>
