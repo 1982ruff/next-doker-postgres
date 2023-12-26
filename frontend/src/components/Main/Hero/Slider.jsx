@@ -9,29 +9,31 @@ import "swiper/css/pagination";
 import { Navigation, Pagination, A11y } from "swiper/modules";
 import { Swiper, SwiperSlide, useSwiper } from "swiper/react";
 
-const Slider = () => {
+const Slider = ({ slides }) => {
   return (
     <Swiper
       slidesPerView={1}
       modules={[Navigation, Pagination, A11y]}
       className="flex relative h-[500px] rounded-lg"
     >
-      {SLIDES.map((item, idx) => (
+      {slides.map((item, idx) => (
         <SwiperSlide
           key={idx}
-          className="rounded-lg  relative overflow-hidden flex justify-center items-center"
+          className="relative flex items-center justify-center overflow-hidden rounded-lg"
         >
           <Image
+            width={1920}
+            height={600}
             src={item.image}
             alt={item.title}
-            className=" rounded-lg w-full h-full object-cover object-center"
+            className="object-cover object-center w-full h-full rounded-lg "
           />
 
           <div className="flex flex-col gap-10 absolute px-28 lg:px-52 top-[50%] translate-y-[-50%] left-0 ">
             <div className="lg:w-[652px]">
               <H1 textColor="#000">{item.title}</H1>
             </div>
-            <Button link={item.link}>Shop now</Button>
+            <Button link={item.slug}>Shop now</Button>
           </div>
         </SwiperSlide>
       ))}
@@ -48,7 +50,7 @@ const SwiperButtons = () => {
     <div className="absolute px-[30px] top-[50%] translate-y-[-50%] z-10 flex w-full justify-between">
       <button
         onClick={() => swiper.slidePrev()}
-        className="border w-14 h-14 flex justify-center items-center  bg-white hover:opacity-100 opacity-60 rounded-full "
+        className="flex items-center justify-center bg-white border rounded-full w-14 h-14 hover:opacity-100 opacity-60 "
       >
         <svg
           width="24"
@@ -65,7 +67,7 @@ const SwiperButtons = () => {
       </button>
       <button
         onClick={() => swiper.slideNext()}
-        className="border w-14 h-14 flex justify-center items-center  bg-white hover:opacity-100 opacity-60 rounded-full "
+        className="flex items-center justify-center bg-white border rounded-full w-14 h-14 hover:opacity-100 opacity-60 "
       >
         <svg
           width="24"

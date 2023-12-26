@@ -12,15 +12,11 @@ import {
 
 const Brands = () => {
   return (
-    <section className="my-20 flex w-full gap-32 mx-auto justify-center items-center ">
+    <section className="flex items-center justify-center w-full gap-32 mx-auto my-20 ">
       <Carousel>
         <CarouselContent>
           {BRANDS.map((item, idx) => (
-            <CarouselItem>
-              <div div key={idx}>
-                {item.logo}
-              </div>
-            </CarouselItem>
+            <CarouselItem key={idx}>{item.logo}</CarouselItem>
           ))}
         </CarouselContent>
         <CarouselPrevious />

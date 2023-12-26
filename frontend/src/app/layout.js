@@ -3,6 +3,10 @@ import { nunito_sans } from "../../font";
 import "./globals.css";
 import Header from "@/components/Header/Header";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import { Toaster } from "@/components/ui/toaster";
+import { getServerSession } from "next-auth";
+import { SessionProvider } from "next-auth/react";
+import Provider from "@/components/Providers/Provider";
 
 export const metadata = {
   title: "Create Next App",
@@ -13,11 +17,14 @@ export default function RootLayout({ children }) {
   return (
     <html lang="ru">
       <body className={` max-w-[1920px] mx-auto ${nunito_sans.className}`}>
-        <TooltipProvider>
-          {/* <Header /> */}
-          {children}
-          {/* <Footer /> */}
-        </TooltipProvider>
+        <Provider>
+          <TooltipProvider>
+            <Header />
+            {children}
+            <Footer />
+          </TooltipProvider>
+          <Toaster />
+        </Provider>
       </body>
     </html>
   );

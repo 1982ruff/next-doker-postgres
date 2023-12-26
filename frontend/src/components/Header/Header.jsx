@@ -4,16 +4,27 @@ import Link from "next/link";
 import { bitter } from "../../../font";
 import { usePathname } from "next/navigation";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
+import Provider from "../Providers/Provider";
+import ServerButton from "./ServerButton";
 
 const Header = () => {
+  const pathname = usePathname();
+
   return (
-    <header className="flex border-b px-20 flex-row py-7 justify-between items-center">
-      <Logo />
-      <nav>
-        <Menu />
-      </nav>
-      <Account />
-    </header>
+    <>
+      <Provider>
+        {pathname !== "/register" && pathname !== "/login" ? (
+          <header className="flex flex-row items-center justify-between px-20 border-b py-7">
+            <Logo />
+            <nav>
+              <Menu />
+            </nav>
+            <ServerButton />
+            <Account />
+          </header>
+        ) : null}
+      </Provider>
+    </>
   );
 };
 
@@ -21,7 +32,7 @@ export default Header;
 
 const Logo = () => {
   return (
-    <Link href={"/"} className="gap-2 flex items-center">
+    <Link href={"/"} className="flex items-center gap-2">
       <svg
         width="52"
         height="52"
@@ -76,7 +87,7 @@ const Menu = () => {
         <li key={idx}>
           <Link
             href={item.link}
-            className=" text-Lead text-xl font-normal hover:text-Satoimo_Brown"
+            className="text-xl font-normal text-Lead hover:text-Satoimo_Brown"
           >
             {item.title}
           </Link>
@@ -91,7 +102,7 @@ const Account = () => {
 
   return (
     <>
-      <ul className="flex gap-8">
+      <ul className="flex items-center gap-8">
         <Tooltip>
           <li>
             <TooltipTrigger>

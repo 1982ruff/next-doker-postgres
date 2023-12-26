@@ -30,6 +30,7 @@ module.exports = {
         Basalt_grey: "#999999",
         Steam_Color: "#DDDDDD",
         Lynx_White: "#F7F7F7",
+        Orange: "#FF7131",
       },
       borderRadius: {
         lg: "var(--radius)",

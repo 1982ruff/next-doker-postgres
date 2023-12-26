@@ -2,13 +2,14 @@ import React, { useId } from "react";
 import H3 from "../Headings/H3";
 import P3 from "../Paragraph/P3";
 import Button from "../Buttons/Button";
+import InputBlock from "../InputBlock";
 
 const ContactBlock = () => {
   return (
-    <div className="my-20 p-12 w-3/4 gap-4 shadow-xl shadow-gray-100 mx-auto flex flex-col justify-start items-start">
+    <div className="flex flex-col items-start justify-start w-3/4 gap-4 p-12 mx-auto my-20 shadow-xl shadow-gray-100">
       <H3>Get a quote</H3>
-      <div className="bg-white flex gap-12 items-center rounded-xl w-full px-4">
-        <form className=" basis-2/3 grid gap-8 grid-cols-2">
+      <div className="flex items-center w-full gap-12 px-4 bg-white rounded-xl">
+        <form className="grid grid-cols-2 gap-8  basis-2/3">
           <InputBlock label="Name" />
           <InputBlock label="Email" />
           <InputBlock label="Subject" />
@@ -20,9 +21,9 @@ const ContactBlock = () => {
           <Button link={"/"}>Send Now</Button>
         </form>
 
-        <div className=" flex flex-col gap-8 p-10 basis-1/3 rounded-xl bg-Lynx_White ">
+        <div className="flex flex-col gap-8 p-10  basis-1/3 rounded-xl bg-Lynx_White">
           <div className="flex items-center gap-3 ">
-            <span className=" size-12 rounded-full flex justify-center items-center bg-white">
+            <span className="flex items-center justify-center bg-white rounded-full  size-12">
               <svg
                 width="24"
                 height="24"
@@ -40,7 +41,7 @@ const ContactBlock = () => {
           </div>
 
           <div className="flex items-center gap-3 ">
-            <span className=" size-12 rounded-full flex justify-center items-center bg-white">
+            <span className="flex items-center justify-center bg-white rounded-full  size-12">
               <svg
                 width="24"
                 height="24"
@@ -58,7 +59,7 @@ const ContactBlock = () => {
           </div>
 
           <div className="flex items-center gap-3 ">
-            <span className=" size-12 rounded-full flex justify-center items-center bg-white">
+            <span className="flex items-center justify-center bg-white rounded-full  size-12">
               <svg
                 width="24"
                 height="24"
@@ -75,7 +76,7 @@ const ContactBlock = () => {
             <P3>www.furnitures.com</P3>
           </div>
 
-          <div className="flex mt-8 items-center w-full justify-center gap-4">
+          <div className="flex items-center justify-center w-full gap-4 mt-8">
             <svg
               width="24"
               height="24"
@@ -188,18 +189,3 @@ const ContactBlock = () => {
 };
 
 export default ContactBlock;
-
-const InputBlock = ({ label, type, id }) => {
-  return (
-    <div className="">
-      <label className="text-xl" htmlFor={id}>
-        {label}
-      </label>
-      <input
-        type={type}
-        id={id}
-        className="w-full text-xl mt-4 focus:outline-none py-4 rounded-xl px-6 bg-Lynx_White"
-      />
-    </div>
-  );
-};

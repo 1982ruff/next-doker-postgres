@@ -8,35 +8,76 @@ import ProductOfTheWeek from "@/components/Main/ProductOfTheWeek/ProductOfTheWee
 import Promo from "@/components/Main/Promo/Promo";
 import RecentBlogs from "@/components/Main/RecentBlogs/RecentBlogs";
 import SectionChair from "@/components/Main/SectionChair/SectionChair";
-import Subscribe from "@/components/Main/Subscribe/Subscribe";
 
-export default function Home() {
+const getCategory = async () => {
+  const res = await fetch("http://localhost:3000/api/categories", {
+    cache: "no-store",
+  });
+
+  if (!res.ok) {
+    throw new Error("Failed");
+  }
+
+  return res.json();
+};
+
+const getProducts = async () => {
+  const res = await fetch("http://localhost:3000/api/product", {
+    cache: "no-store",
+  });
+
+  if (!res.ok) {
+    throw new Error("Failed");
+  }
+
+  return res.json();
+};
+
+const getSlides = async () => {
+  const res = await fetch("http://localhost:3000/api/slides", {
+    cache: "no-store",
+  });
+
+  if (!res.ok) {
+    throw new Error("Failed");
+  }
+
+  return res.json();
+};
+
+export default async function Home() {
+  const category = await getCategory();
+  const product = await getProducts();
+  const slides = await getSlides();
+
+  console.log(slides);
+
   return (
     <main className="">
-      <Slider />
-      <Promo />
+      <Slider slides={slides} />
+      <Promo product={product} />
 
       {/* Categories */}
-      <section className="lg:px-20 px-10 text-center">
+      <section className="px-10 text-center lg:px-20">
         <SectionDivider title={"Categories"} />
-        <Category />
+        <Category category={category} />
       </section>
 
       {/* New Products */}
-      <section className="lg:px-20 px-10 text-center">
+      <section className="px-10 text-center lg:px-20">
         <SectionDivider title={"New Products"} />
-        <NewProducts />
+        <NewProducts product={product} />
       </section>
 
       {/* Match Furniture Styles Banner*/}
-      <section className="lg:px-20 px-10 text-center">
+      <section className="px-10 text-center lg:px-20">
         <Banner />
       </section>
 
       {/* Products of the week */}
-      <section className="lg:px-20 px-10 text-center">
+      <section className="px-10 text-center lg:px-20">
         <SectionDivider title={"Products of the week"} />
-        <ProductOfTheWeek />
+        <ProductOfTheWeek product={product} />
       </section>
 
       {/* Stylish minimal chair */}
@@ -46,10 +87,10 @@ export default function Home() {
       <Brands />
 
       {/* Recent Blogs */}
-      {/* <section className="px-20 text-center">
+      <section className="px-20 text-center">
         <SectionDivider title={"Recent Blogs"} />
         <RecentBlogs />
-      </section> */}
+      </section>
     </main>
   );
 }
