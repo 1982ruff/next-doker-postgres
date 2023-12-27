@@ -1,6 +1,9 @@
 import ContactBlock from "@/components/ContactPage/ContactBlock";
 import Headinfo from "@/components/HeadInfo/Headinfo";
-import React from "react";
+
+export const metadata = {
+  title: "Contact | Furnitura",
+};
 
 const ContactPage = () => {
   return (

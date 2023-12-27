@@ -7,20 +7,20 @@ import P3 from "@/components/Paragraph/P3";
 
 const Banner = () => {
   return (
-    <div className="flex flex-wrap gap-6 xl:gap-0 my-10 lg:my-20">
+    <div className="flex flex-wrap gap-6 my-10 xl:gap-0 lg:my-20">
       <div className=" max-h-[668px] w-full xl:basis-2/3">
         <Image
           src={banner}
           alt="/"
-          className=" rounded-xl w-full h-full object-cover"
+          className="object-cover w-full h-full  rounded-xl"
         />
       </div>
-      <div className=" w-full xl:basis-1/3 flex xl:px-20 text-start flex-col justify-center items-start gap-6">
+      <div className="flex flex-col items-start justify-center w-full gap-6  xl:basis-1/3 xl:px-20 text-start">
         <H4>Match Furniture Styles</H4>
         <P3>
           Lorem Ipsum is simply dummy text of the printing and typesetting
-          industry. Lorem Ipsum has been the industry's standard dummy text ever
-          since.
+          industry. Lorem Ipsum has been the industry&apos;s standard dummy text
+          ever since.
         </P3>
         <Button link={"/"}> Shop Now </Button>
       </div>

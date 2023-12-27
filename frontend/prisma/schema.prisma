@@ -30,7 +30,6 @@ model User {
   email             String              @unique
   createdAt         DateTime            @default(now()) @map("created_at")
   updatedAt         DateTime            @updatedAt @map("updated_at")
-  password          String
   emailVerified     DateTime?
   image             String?
   isAdmin           Boolean             @default(false)
@@ -114,4 +113,49 @@ model Slides {
   title String
   slug  String
   image String?
+}
+
+model Brands {
+  id    String @id @default(cuid())
+  title String
+  slug  String @unique
+  logo  String
+}
+
+model Blogs {
+  id          String @id @default(cuid())
+  title       String
+  description String
+  link        String
+  image       String
+}
+
+model Team {
+  id          String @id @default(cuid())
+  name        String
+  description String
+  link        String
+  image       String
+}
+
+model Testimonial {
+  id           String @id @default(cuid())
+  title        String
+  description  String
+  name         String
+  whoInCompany String
+  image        String
+}
+
+model FullBlog {
+  id          String @id @default(cuid())
+  title       String
+  description String
+  link        String
+  category    String
+  name        String
+  likes       String
+  comments    String
+  date        String
+  image       String
 }

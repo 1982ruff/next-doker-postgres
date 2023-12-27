@@ -7,10 +7,10 @@ const Footer = () => {
     <>
       <Subscribe />
 
-      <footer className=" bg-Lead w-full px-52 pt-20 ">
-        <div className="grid grid-cols-3 items-center justify-center ">
-          <div className="flex w-full flex-col gap-12">
-            <div className=" flex gap-3 ">
+      <footer className="w-full pt-20  bg-Lead px-52">
+        <div className="grid items-center justify-center grid-cols-3 ">
+          <div className="flex flex-col w-full gap-12">
+            <div className="flex gap-3 ">
               <svg
                 width="270"
                 height="52"
@@ -57,12 +57,12 @@ const Footer = () => {
 
             <p className=" text-Steam_Color text-xl font-light leading-[30px]">
               Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the industry's standard dummy text
-              ever since.
+              industry. Lorem Ipsum has been the industry&apos;s standard dummy
+              text ever since.
             </p>
           </div>
-          <nav className="flex justify-between items-center px-20">
-            <ul className=" flex flex-col gap-6 text-Lynx_White">
+          <nav className="flex items-center justify-between px-20">
+            <ul className="flex flex-col gap-6  text-Lynx_White">
               <li className="">
                 <H5>Customer</H5>{" "}
               </li>
@@ -76,7 +76,7 @@ const Footer = () => {
                 <Link href={"/"}>Blog</Link>
               </li>
             </ul>
-            <ul className=" flex flex-col gap-6 text-Lynx_White">
+            <ul className="flex flex-col gap-6  text-Lynx_White">
               <li className="">
                 <H5>Information</H5>{" "}
               </li>
@@ -91,8 +91,8 @@ const Footer = () => {
               </li>
             </ul>
           </nav>
-          <div className="flex w-full flex-col gap-12">
-            <ul className=" flex flex-col gap-6 text-Lynx_White">
+          <div className="flex flex-col w-full gap-12">
+            <ul className="flex flex-col gap-6  text-Lynx_White">
               <li className="">
                 <H5>Contact Info</H5>{" "}
               </li>
@@ -101,8 +101,8 @@ const Footer = () => {
                   2118 Thornridge Cir. Syracuse, Connecticut 35624.
                 </p>
               </li>
-              <li className="text-xl flex items-center gap-3 font-light">
-                <span className="flex justify-center items-center bg-Lynx_White h-10 w-10 rounded-full">
+              <li className="flex items-center gap-3 text-xl font-light">
+                <span className="flex items-center justify-center w-10 h-10 rounded-full bg-Lynx_White">
                   <svg
                     width="24"
                     height="24"
@@ -118,8 +118,8 @@ const Footer = () => {
                 </span>
                 123-456-789
               </li>
-              <li className="text-xl flex items-center gap-3 font-light">
-                <span className="flex justify-center items-center bg-Lynx_White h-10 w-10 rounded-full">
+              <li className="flex items-center gap-3 text-xl font-light">
+                <span className="flex items-center justify-center w-10 h-10 rounded-full bg-Lynx_White">
                   <svg
                     width="24"
                     height="24"
@@ -139,8 +139,8 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="w-full flex justify-between py-5 mt-10 border-t border-Lynx_White">
-          <p className=" text-Lynx_White/50 font-light text-lg">
+        <div className="flex justify-between w-full py-5 mt-10 border-t border-Lynx_White">
+          <p className="text-lg font-light  text-Lynx_White/50">
             @ 2023 DIVANO. All Rights Reserved Eleyas Hasan
           </p>
           <ul className="flex gap-5">

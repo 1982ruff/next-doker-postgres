@@ -1,8 +1,7 @@
 import RegisterForm from "@/components/Auth/RegisterForm";
 
 export const metadata = {
-  title: "Register",
-  description: "...",
+  title: "Register | Furnitura",
 };
 
 const RegisterPage = () => {

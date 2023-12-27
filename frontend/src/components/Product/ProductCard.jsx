@@ -2,8 +2,9 @@
 import Image from "next/image";
 import H6 from "../Headings/H6";
 import { useState } from "react";
+import Link from "next/link";
 
-const ProductCard = ({ title, image, price }) => {
+const ProductCard = ({ title, image, price, slug }) => {
   const [show, setShow] = useState(false);
 
   return (
@@ -12,17 +13,21 @@ const ProductCard = ({ title, image, price }) => {
       onMouseLeave={() => setShow(false)}
       className="relative flex flex-col items-center justify-center cursor-pointer gap-y-3 rounded-xl "
     >
-      <div className="flex items-center justify-center w-[350px] h-[350px] rounded-lg bg-Lynx_White">
-        <Image
-          width={250}
-          height={250}
-          src={image}
-          alt={title}
-          className="transition-transform duration-150 ease-in-out scale-75 hover:scale-90"
-        />
-      </div>
+      <Link href={`/product/${slug}`}>
+        <div className="flex items-center justify-center w-[350px] h-[350px] rounded-lg bg-Lynx_White">
+          <Image
+            width={250}
+            height={250}
+            src={image}
+            alt={title}
+            className="transition-transform duration-150 ease-in-out scale-75 hover:scale-90"
+          />
+        </div>
+      </Link>
       <div className="px-4 mt-2 text-start place-self-start">
-        <H6>{title}</H6>
+        <H6>
+          <Link href={`/product/${slug}`}>{title}</Link>
+        </H6>
         <h6 className="text-xl font-bold text-Satoimo_Brown">$ {price} </h6>
       </div>
       {show && (

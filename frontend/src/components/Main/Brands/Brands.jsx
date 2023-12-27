@@ -1,27 +1,17 @@
-"use client";
-import { BRANDS } from "@/data";
-import * as React from "react";
+import Image from "next/image";
 
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel";
-
-const Brands = () => {
+const Brands = ({ brands }) => {
   return (
-    <section className="flex items-center justify-center w-full gap-32 mx-auto my-20 ">
-      <Carousel>
-        <CarouselContent>
-          {BRANDS.map((item, idx) => (
-            <CarouselItem key={idx}>{item.logo}</CarouselItem>
-          ))}
-        </CarouselContent>
-        <CarouselPrevious />
-        <CarouselNext />
-      </Carousel>
+    <section className="flex flex-wrap items-center justify-center w-full gap-32 mx-auto my-6 lg:my-20 ">
+      {brands.map((item, idx) => (
+        <Image
+          width={120}
+          height={50}
+          src={item.logo}
+          key={idx}
+          alt={item.title}
+        />
+      ))}
     </section>
   );
 };

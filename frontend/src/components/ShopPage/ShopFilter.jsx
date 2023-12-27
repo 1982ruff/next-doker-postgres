@@ -6,7 +6,6 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Slider } from "@/components/ui/slider";
 import { cn } from "@/lib/utils";
 import Button from "../Buttons/Button";
-import { PRODUCTS } from "@/data";
 import RecentlyView from "./RecentlyView";
 
 const categories = [
@@ -38,16 +37,15 @@ const categories = [
 
 const colors = ["Purple", "Blue", "Red", "Green", "Yellow", "Grey"];
 
-const ShopFilter = () => {
-  const id = useId();
+const ShopFilter = ({ products }) => {
   return (
-    <aside className="w-full flex justify-center flex-col gap-10">
-      <div className=" bg-Lynx_White rounded-lg py-4 items-center flex justify-between px-10">
+    <aside className="flex flex-col justify-center w-full gap-10">
+      <div className="flex items-center justify-between px-10 py-4 rounded-lg bg-Lynx_White">
         <input
           type="text"
           name=""
           id=""
-          className=" bg-Lynx_White px-2 py-2 text-xl focus:outline-none"
+          className="px-2 py-2 text-xl bg-Lynx_White focus:outline-none"
           placeholder="Search..."
         />
         <button>
@@ -112,7 +110,7 @@ const ShopFilter = () => {
 
       {/* Price */}
       <AccordionProvider title={"Recently view"}>
-        {PRODUCTS.map((item, idx) => (
+        {products.map((item, idx) => (
           <RecentlyView
             key={idx}
             image={item.image}

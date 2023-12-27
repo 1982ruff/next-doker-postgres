@@ -1,23 +1,37 @@
 import Button from "@/components/Buttons/Button";
 import Headinfo from "@/components/HeadInfo/Headinfo";
 import H4 from "@/components/Headings/H4";
-import P1 from "@/components/Paragraph/P1";
 import P2 from "@/components/Paragraph/P2";
 import P3 from "@/components/Paragraph/P3";
 import Quantity from "@/components/Quantity";
-import { PRODUCT_OF_THE_WEEK } from "@/data";
 import Image from "next/image";
-import React from "react";
 
-const CartPage = () => {
+export const metadata = {
+  title: "Cart | Furnitura",
+};
+
+const getProducts = async () => {
+  const res = await fetch("http://localhost:3000/api/product", {
+    cache: "no-store",
+  });
+
+  if (!res.ok) {
+    throw new Error("Failed");
+  }
+
+  return res.json();
+};
+
+const CartPage = async () => {
+  const product = await getProducts();
   return (
     <section className="">
       <Headinfo title={"Cart"} />
 
-      <div className="p-20 gap-14 grid grid-cols-3">
+      <div className="grid grid-cols-3 p-20 gap-14">
         {/* Cart  */}
-        <div className=" col-span-2 border rounded-2xl p-10 ">
-          {PRODUCT_OF_THE_WEEK.map((item, idx) => (
+        <div className="col-span-2 p-10 border rounded-2xl">
+          {product.map((item, idx) => (
             <CartDetail
               key={idx}
               image={item.image}
@@ -28,32 +42,32 @@ const CartPage = () => {
         </div>
 
         {/* Order Summary */}
-        <div className="w-full justify-start col-auto text-start flex-col gap-6 flex rounded-2xl p-10">
+        <div className="flex flex-col justify-start w-full col-auto gap-6 p-10 text-start rounded-2xl">
           <H4>Order Summary</H4>
 
-          <div className=" flex flex-col border-b pb-4 gap-4">
-            <div className=" flex  justify-between">
+          <div className="flex flex-col gap-4 pb-4 border-b ">
+            <div className="flex justify-between ">
               <p className="text-Lead text-start font-normal text-2xl leading-[140%]">
                 Price
               </p>
               <P3>$80.00</P3>
             </div>
 
-            <div className=" flex  justify-between">
+            <div className="flex justify-between ">
               <p className="text-Lead text-start font-normal text-2xl leading-[140%]">
                 Discount
               </p>
               <P3>$15.05</P3>
             </div>
 
-            <div className=" flex  justify-between">
+            <div className="flex justify-between ">
               <p className="text-Lead text-start font-normal text-2xl leading-[140%]">
                 Shipping
               </p>
               <P3>Free</P3>
             </div>
 
-            <div className=" flex  justify-between">
+            <div className="flex justify-between ">
               <p className="text-Lead text-start font-normal text-2xl leading-[140%]">
                 Coupon Applied
               </p>
@@ -61,14 +75,14 @@ const CartPage = () => {
             </div>
           </div>
 
-          <div className=" flex  justify-between">
+          <div className="flex justify-between ">
             <p className="text-Lead text-start font-normal text-2xl leading-[140%]">
               TOTAL
             </p>
             <P3>$54.95</P3>
           </div>
 
-          <div className=" flex  justify-between">
+          <div className="flex justify-between ">
             <p className="text-Lead text-start font-normal text-2xl leading-[140%]">
               Estimated Delivery by
             </p>
@@ -86,20 +100,19 @@ export default CartPage;
 
 const CartDetail = ({ image, title, price, color }) => {
   return (
-    <div className="flex justify-between text-start p-10 last:border-none border-b border-Basalt_grey/30 shadow-gray-100  gap-10">
-      <div className="flex justify-center items-center rounded-xl bg-Lynx_White w-52 h-52">
+    <div className="flex justify-between gap-10 p-10 border-b text-start last:border-none border-Basalt_grey/30 shadow-gray-100">
+      <div className="flex items-center justify-center rounded-xl bg-Lynx_White w-52 h-52">
         <Image
+          width={120}
+          height={120}
           src={image}
           alt={title}
-          className=" w-36 h-36 object-cover hover:scale-110"
+          className="object-cover w-36 h-36 hover:scale-110"
         />
       </div>
 
-      <div className="flex justify-self-start justify-center gap-3 items-start text-start flex-col">
-        <p
-          className="text-Lead text-center font-normal text-2xl leading-[140%]"
-          textColor={"#222222"}
-        >
+      <div className="flex flex-col items-start justify-center gap-3 justify-self-start text-start">
+        <p className="text-Lead text-center font-normal text-2xl leading-[140%]">
           {title}
         </p>
         <P3>Color: Gunnared biege</P3>
@@ -107,10 +120,10 @@ const CartDetail = ({ image, title, price, color }) => {
         <Quantity />
       </div>
 
-      <div className="flex justify-center items-start flex-col gap-8">
+      <div className="flex flex-col items-start justify-center gap-8">
         <P2>${price}</P2>
 
-        <button className=" size-10 hover:text-red-500 bg-Lynx_White rounded-lg flex justify-center items-center">
+        <button className="flex items-center justify-center rounded-lg size-10 hover:text-red-500 bg-Lynx_White">
           <svg
             width="24"
             height="24"

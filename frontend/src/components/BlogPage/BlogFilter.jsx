@@ -1,5 +1,3 @@
-import { BLOGS, FULL_BLOGS } from "@/data";
-import React from "react";
 import H5 from "../Headings/H5";
 import Image from "next/image";
 import P3 from "../Paragraph/P3";
@@ -34,15 +32,15 @@ const categories = [
 
 const tags = ["Kitchen", "Decorative"];
 
-const BlogFilter = () => {
+const BlogFilter = ({ blogs, fullBlogs }) => {
   return (
-    <aside className="w-full flex justify-center flex-col gap-10">
-      <div className=" bg-Lynx_White rounded-lg py-4 items-center flex justify-between px-10">
+    <aside className="flex flex-col justify-center w-full gap-10">
+      <div className="flex items-center justify-between px-10 py-4 rounded-lg bg-Lynx_White">
         <input
           type="text"
           name=""
           id=""
-          className=" bg-Lynx_White px-2 py-2 text-xl focus:outline-none"
+          className="px-2 py-2 text-xl bg-Lynx_White focus:outline-none"
           placeholder="Search..."
         />
         <button>
@@ -61,17 +59,17 @@ const BlogFilter = () => {
         </button>
       </div>
 
-      <div className="my-6 flex flex-col gap-4">
-        <H5>{FULL_BLOGS[0].title}</H5>
-        <Image src={FULL_BLOGS[0].image} alt="" />
+      <div className="flex flex-col gap-4 my-6">
+        <H5>{fullBlogs[0].title}</H5>
+        <Image width={300} height={150} src={fullBlogs[0].image} alt="" />
 
-        <P3>{FULL_BLOGS[0].description}</P3>
+        <P3>{fullBlogs[0].description}</P3>
       </div>
 
       {/* Recent Posts */}
       <AccordionProvider title={"Recent Posts"}>
         <ul className="">
-          {BLOGS.map((item, idx) => (
+          {blogs.map((item, idx) => (
             <li key={idx} className="mt-4">
               <P3>{item.title}</P3>
             </li>

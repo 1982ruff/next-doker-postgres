@@ -22,19 +22,25 @@ import { toast } from "@/components/ui/use-toast";
 
 import * as z from "zod";
 import { useState } from "react";
+import { signIn, useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 const formSchema = z.object({
   email: z.string().min(5).max(50).email({ message: "Must be email" }),
   password: z.string().min(5, { message: "Must have at least 5 character" }),
-  // .regex(passwordValidation, {
-  //   message: "Your password is not valid",
-  // }),
 });
 
 const LoginForm = () => {
   const [checked, setChecked] = useState(false);
+  const { status } = useSession();
+  const router = useRouter();
 
-  console.log(checked);
+  if (status === "loading") {
+    return <p className="">Loading</p>;
+  }
+  if (status === "authenticated") {
+    router.push("/");
+  }
 
   const form = useForm({
     resolver: zodResolver(formSchema),
@@ -133,7 +139,11 @@ const LoginForm = () => {
               <h5 className="text-center text-gray-300">OR</h5>
 
               <div className="flex justify-center gap-5 2xl:gap-14">
-                <button className="flex items-center justify-center rounded-full xl:size-14 size-10 bg-Lynx_White">
+                {/* Google button */}
+                <button
+                  onClick={() => signIn("google")}
+                  className="flex items-center justify-center rounded-full xl:size-14 size-10 bg-Lynx_White"
+                >
                   <svg
                     width="25"
                     height="25"
@@ -168,7 +178,11 @@ const LoginForm = () => {
                   </svg>
                 </button>
 
-                <button className="flex items-center justify-center rounded-full xl:size-14 size-10 bg-Lynx_White">
+                {/* Facebook button */}
+                <button
+                  onClick={() => signIn("facebook")}
+                  className="flex items-center justify-center rounded-full xl:size-14 size-10 bg-Lynx_White"
+                >
                   <svg
                     width="25"
                     height="25"
@@ -183,7 +197,11 @@ const LoginForm = () => {
                   </svg>
                 </button>
 
-                <button className="flex items-center justify-center rounded-full xl:size-14 size-10 bg-Lynx_White">
+                {/* Github button */}
+                <button
+                  onClick={() => signIn("github")}
+                  className="flex items-center justify-center rounded-full xl:size-14 size-10 bg-Lynx_White"
+                >
                   <svg
                     width="25"
                     height="25"
@@ -202,7 +220,7 @@ const LoginForm = () => {
 
             <div className="mt-6 text-center lg:mt-2">
               <H6>
-                Don't have an account ?{" "}
+                Don&apos;t have an account ?{" "}
                 <Link href={"/register"} className=" text-Orange">
                   Register
                 </Link>

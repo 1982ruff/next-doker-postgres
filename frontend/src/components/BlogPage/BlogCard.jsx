@@ -13,19 +13,19 @@ const BlogCard = ({
   name,
   category,
   image,
-  link,
+  id,
 }) => {
   return (
-    <div className="flex flex-col mb-12 gap-4">
-      <div className="h-[450px] rounded-xl relative z-10">
+    <div className="flex flex-col gap-4 mb-12">
+      <div className="h-[450px] w-full rounded-xl relative z-10">
         <Image
-          className="z-0 rounded-xl"
+          width={850}
+          height={300}
+          className="z-0 object-cover w-full h-full rounded-xl"
           src={image}
           alt={"background"}
           quality={100}
-          fill={true}
           sizes="100vw"
-          placeholder="blur"
         />
       </div>
 
@@ -65,7 +65,7 @@ const BlogCard = ({
         </div>
       </div>
 
-      <Link href={link}>
+      <Link href={`/blog/${id}`}>
         <H4>{title}</H4>
       </Link>
 

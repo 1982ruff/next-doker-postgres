@@ -1,10 +1,8 @@
 import LoginForm from "@/components/Auth/LoginForm";
 
 export const metadata = {
-  title: "Login",
-  description: "",
+  title: "Login | Furnitura",
 };
-
 const LoginPage = () => {
   return (
     <section className="flex items-center justify-center w-full h-screen px-10 lg:px-20">

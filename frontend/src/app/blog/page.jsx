@@ -1,10 +1,23 @@
 import BlogCard from "@/components/BlogPage/BlogCard";
-import { FULL_BLOGS } from "@/data";
 
-const BlogPage = () => {
+const getFullBlog = async () => {
+  const res = await fetch("http://localhost:3000/api/fullBlogs", {
+    cache: "no-store",
+  });
+
+  if (!res.ok) {
+    throw new Error("Failed");
+  }
+
+  return res.json();
+};
+
+const BlogPage = async () => {
+  const fullBlogs = await getFullBlog();
+
   return (
     <>
-      {FULL_BLOGS.map((item, idx) => (
+      {fullBlogs?.map((item, idx) => (
         <BlogCard
           key={idx}
           image={item.image}
@@ -14,7 +27,7 @@ const BlogPage = () => {
           description={item.description}
           likes={item.likes}
           comments={item.comments}
-          link={item.link}
+          id={item.id}
         />
       ))}
     </>

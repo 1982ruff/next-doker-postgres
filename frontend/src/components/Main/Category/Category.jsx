@@ -2,7 +2,6 @@ import H6 from "@/components/Headings/H6";
 import Image from "next/image";
 
 const Category = ({ category }) => {
-  console.log(category);
   return (
     <div className="grid grid-cols-2 gap-6 my-6 lg:gap-16 xl:my-20 sm:grid-cols-3 xl:grid-cols-6 ">
       {category.map((item, idx) => (

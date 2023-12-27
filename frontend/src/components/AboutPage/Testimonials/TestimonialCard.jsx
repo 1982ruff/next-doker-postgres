@@ -7,7 +7,7 @@ import React from "react";
 
 const TestimonialCard = ({ image, title, description, name, whoInCompany }) => {
   return (
-    <div className=" bg-Lynx_White rounded-xl flex flex-col gap-6 justify-center p-16 items-start">
+    <div className="flex flex-col items-start justify-center gap-6 p-16  bg-Lynx_White rounded-xl">
       <svg
         width="60"
         height="46"
@@ -20,14 +20,20 @@ const TestimonialCard = ({ image, title, description, name, whoInCompany }) => {
           fill="#644321"
         />
       </svg>
-      <div className=" w-4/5 flex flex-col gap-6">
+      <div className="flex flex-col w-4/5 gap-6 ">
         <H2>{title}</H2>
         <P3>{description}</P3>
       </div>
 
-      <div className="flex gap-3 items-center">
-        <Image src={image} alt={name} className=" rounded-full size-14" />
-        <div className=" flex flex-col">
+      <div className="flex items-center gap-3">
+        <Image
+          width={55}
+          height={55}
+          src={image}
+          alt={name}
+          className="rounded-full  size-14"
+        />
+        <div className="flex flex-col ">
           <H6>{name}</H6>
           <P4>{whoInCompany}</P4>
         </div>

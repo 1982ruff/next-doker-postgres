@@ -6,29 +6,71 @@ import H6 from "@/components/Headings/H6";
 import P3 from "@/components/Paragraph/P3";
 import ProductCard from "@/components/Product/ProductCard";
 import Quantity from "@/components/Quantity";
-import { PRODUCTS, PRODUCT_OF_THE_WEEK } from "@/data";
 import Image from "next/image";
 
-const ProductDetailPage = () => {
+export async function generateMetadata({ params }, parent) {
+  const slug = params.slug;
+  const product = await fetch(`http://localhost:3000/api/product/${slug}`).then(
+    (res) => res.json()
+  );
+  const previousImages = (await parent).openGraph?.images || [];
+  return {
+    title: `Furnitura | ${product.title}`,
+    openGraph: {
+      images: [params.image, ...previousImages],
+    },
+  };
+}
+
+const getDetailProduct = async (slug) => {
+  const res = await fetch(`http://localhost:3000/api/product/${slug}`, {
+    cache: "no-store",
+  });
+
+  if (!res.ok) {
+    throw new Error("Failed");
+  }
+
+  return res.json();
+};
+
+const getProducts = async () => {
+  const res = await fetch(`http://localhost:3000/api/product`, {
+    cache: "no-store",
+  });
+
+  if (!res.ok) {
+    throw new Error("Failed");
+  }
+
+  return res.json();
+};
+
+const ProductDetailPage = async ({ params }) => {
+  const productSlug = await getDetailProduct(params.slug);
+  const product = await getProducts();
+
   return (
     <section className="p-20">
       <div className="grid grid-cols-2 gap-20">
         {/* Detailed Information */}
-        <div className=" flex flex-col  gap-11">
+        <div className="flex flex-col gap-11">
           {/* Breadcrumbs */}
           <div className="flex">
-            <H6>Chair / Comfort furniture commode chair</H6>
+            <H6>{productSlug.title}</H6>
           </div>
 
           {/* Main title */}
-          <H2>{PRODUCTS[0].title}</H2>
+          <H2>{productSlug.title}</H2>
 
           {/* Price & Rating */}
           <div className="flex justify-between">
             {/* Price */}
             <div className="flex gap-3">
-              <H5 textColor={"#644321"}>${PRODUCTS[0].price}</H5>
-              <H5 textColor={"#999999"}>${PRODUCTS[0].priceOld}</H5>
+              <H5 textColor={"#644321"}>${productSlug.price}</H5>
+              <h5 className="font-normal text-2xl text-Basalt_grey/40 line-through leading-[140%]">
+                ${productSlug.priceOld}
+              </h5>
             </div>
 
             {/* Rating */}
@@ -55,25 +97,25 @@ const ProductDetailPage = () => {
           </div>
 
           {/* Description */}
-          <P3>{PRODUCTS[0].description}</P3>
+          <P3>{productSlug.description}</P3>
 
           {/* Quantity and Button */}
-          <div className=" flex gap-10">
+          <div className="flex gap-10 ">
             <Quantity />
             <Button link={"/"}>Add To Cart</Button>
           </div>
 
           {/* Category */}
-          <P3>Category: {PRODUCTS[0].category}</P3>
+          <P3>Category: {productSlug.category}</P3>
 
           {/* Tags */}
-          <P3>Tag: {PRODUCTS[0].tags}</P3>
+          <P3>Tag: {productSlug.tags}</P3>
 
           {/* Shipping */}
-          <P3 textColor={"#000"}>Shipping: {PRODUCTS[0].shipping}</P3>
+          <P3 textColor={"#000"}>Shipping: {productSlug.shipping}</P3>
 
           {/* Add to wishlist */}
-          <button className="flex gap-3 items-center">
+          <button className="flex items-center gap-3">
             <svg
               width="24"
               height="24"
@@ -91,45 +133,57 @@ const ProductDetailPage = () => {
         </div>
 
         {/* Image & Thumbs */}
-        <div className="flex  flex-col">
+        <div className="flex flex-col">
           <div className=" flex w-[550px] h-[550px] flex-col gap-4 justify-center items-center rounded-xl bg-Lynx_White">
             <Image
-              src={PRODUCTS[0].image}
-              alt={PRODUCTS[0].title}
-              className=" scale-150"
+              width={200}
+              height={200}
+              src={productSlug.image}
+              alt={productSlug.title}
+              className="scale-150 "
             />
           </div>
 
           <div className="flex mt-6 gap-14">
             <Image
-              src={PRODUCTS[0].image}
-              alt={PRODUCTS[0].title}
-              className="size-24 cursor-pointer hover:border-2 border rounded-lg"
+              width={200}
+              height={200}
+              src={productSlug.image}
+              alt={productSlug.title}
+              className="border rounded-lg cursor-pointer size-24 hover:border-2"
+            />
+
+            <Image
+              width={200}
+              height={200}
+              src={productSlug.image}
+              alt={productSlug.title}
+              className="border rounded-lg cursor-pointer size-24 hover:border-2"
             />
             <Image
-              src={PRODUCTS[0].image}
-              alt={PRODUCTS[0].title}
-              className="size-24 cursor-pointer hover:border-2 border rounded-lg"
+              width={200}
+              height={200}
+              src={productSlug.image}
+              alt={productSlug.title}
+              className="border rounded-lg cursor-pointer size-24 hover:border-2"
             />
             <Image
-              src={PRODUCTS[0].image}
-              alt={PRODUCTS[0].title}
-              className="size-24 cursor-pointer hover:border-2 border rounded-lg"
-            />
-            <Image
-              src={PRODUCTS[0].image}
-              alt={PRODUCTS[0].title}
-              className="size-24 cursor-pointer hover:border-2 border rounded-lg"
+              width={200}
+              height={200}
+              src={productSlug.image}
+              alt={productSlug.title}
+              className="border rounded-lg cursor-pointer size-24 hover:border-2"
             />
           </div>
         </div>
       </div>
 
       <SectionDivider title={"Related Products"} />
-      <div className="grid gap-16 my-20 grid-cols-4 ">
-        {PRODUCT_OF_THE_WEEK.map((item, idx) => (
+      <div className="grid grid-cols-4 gap-16 my-20 ">
+        {product.map((item, idx) => (
           <ProductCard
             key={idx}
+            slug={item.slug}
             title={item.title}
             image={item.image}
             price={item.price}

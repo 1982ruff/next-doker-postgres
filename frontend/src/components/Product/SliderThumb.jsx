@@ -27,7 +27,7 @@ const SliderThumb = ({ images }) => {
       >
         {images.map((image, idx) => (
           <SwiperSlide key={idx}>
-            <Image src={image} />
+            <Image src={image} alt="/" />
           </SwiperSlide>
         ))}
       </Swiper>
@@ -44,7 +44,7 @@ const SliderThumb = ({ images }) => {
       >
         {images.map((image, idx) => (
           <SwiperSlide key={idx}>
-            <Image src={image} />
+            <Image src={image} alt="/" />
           </SwiperSlide>
         ))}
       </Swiper>

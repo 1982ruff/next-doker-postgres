@@ -5,6 +5,7 @@ const ProductOfTheWeek = ({ product }) => {
     <div className="grid grid-cols-1 gap-16 my-20 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 ">
       {product.map((item, idx) => (
         <ProductCard
+          slug={item.slug}
           key={idx}
           title={item.title}
           image={item.image}

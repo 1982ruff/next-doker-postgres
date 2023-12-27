@@ -1,11 +1,9 @@
-import React from "react";
 import TestimonialCard from "./TestimonialCard";
-import { TESTIMONIALS } from "@/data";
 
-const Testimonials = () => {
+const Testimonials = ({ testimonials }) => {
   return (
-    <section className="px-20 grid grid-cols-2 gap-16">
-      {TESTIMONIALS.map((item, idx) => (
+    <section className="grid grid-cols-2 gap-16 px-20">
+      {testimonials.map((item, idx) => (
         <TestimonialCard
           key={idx}
           image={item.image}

@@ -1,5 +1,9 @@
 import ProductCard from "@/components/Product/ProductCard";
 
+export const metadata = {
+  title: "Shop | Furnitura",
+};
+
 const getProducts = async () => {
   const res = await fetch("http://localhost:3000/api/product", {
     cache: "no-store",
@@ -25,6 +29,7 @@ const ShopPage = async () => {
         {products.map((item, idx) => (
           <ProductCard
             key={idx}
+            slug={item.slug}
             title={item.title}
             image={item.image}
             price={item.price}

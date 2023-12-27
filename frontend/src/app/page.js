@@ -45,12 +45,36 @@ const getSlides = async () => {
   return res.json();
 };
 
+const getBrands = async () => {
+  const res = await fetch("http://localhost:3000/api/brands", {
+    cache: "no-store",
+  });
+
+  if (!res.ok) {
+    throw new Error("Failed");
+  }
+
+  return res.json();
+};
+
+const getBlogs = async () => {
+  const res = await fetch("http://localhost:3000/api/blogs", {
+    cache: "no-store",
+  });
+
+  if (!res.ok) {
+    throw new Error("Failed");
+  }
+
+  return res.json();
+};
+
 export default async function Home() {
   const category = await getCategory();
   const product = await getProducts();
   const slides = await getSlides();
-
-  console.log(slides);
+  const brands = await getBrands();
+  const blogs = await getBlogs();
 
   return (
     <main className="">
@@ -84,12 +108,12 @@ export default async function Home() {
       <SectionChair />
 
       {/* Brands */}
-      <Brands />
+      <Brands brands={brands} />
 
       {/* Recent Blogs */}
       <section className="px-20 text-center">
         <SectionDivider title={"Recent Blogs"} />
-        <RecentBlogs />
+        <RecentBlogs blogs={blogs} />
       </section>
     </main>
   );

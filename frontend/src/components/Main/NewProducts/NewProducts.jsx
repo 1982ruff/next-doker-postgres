@@ -6,6 +6,7 @@ const NewProducts = ({ product }) => {
       {product.map((item, idx) => (
         <ProductCard
           key={idx}
+          slug={item.slug}
           title={item.title}
           image={item.image}
           price={item.price}

@@ -1,7 +1,6 @@
 "use client";
 import Button from "@/components/Buttons/Button";
 import H1 from "@/components/Headings/H1";
-import { SLIDES } from "@/data";
 import Image from "next/image";
 import "swiper/css";
 import "swiper/css/navigation";

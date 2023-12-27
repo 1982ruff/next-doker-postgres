@@ -5,10 +5,53 @@ import SectionDivider from "@/components/AboutPage/SectionDivider";
 import Testimonials from "@/components/AboutPage/Testimonials/Testimonials";
 import Headinfo from "@/components/HeadInfo/Headinfo";
 import Brands from "@/components/Main/Brands/Brands";
-import Subscribe from "@/components/Main/Subscribe/Subscribe";
 import React from "react";
 
-const AboutPage = () => {
+export const metadata = {
+  title: "About | Furnitura",
+};
+
+const getTeam = async () => {
+  const res = await fetch("http://localhost:3000/api/team", {
+    cache: "no-store",
+  });
+
+  if (!res.ok) {
+    throw new Error("Failed");
+  }
+
+  return res.json();
+};
+
+const getBrands = async () => {
+  const res = await fetch("http://localhost:3000/api/brands", {
+    cache: "no-store",
+  });
+
+  if (!res.ok) {
+    throw new Error("Failed");
+  }
+
+  return res.json();
+};
+
+const getTestimonials = async () => {
+  const res = await fetch("http://localhost:3000/api/testimonials", {
+    cache: "no-store",
+  });
+
+  if (!res.ok) {
+    throw new Error("Failed");
+  }
+
+  return res.json();
+};
+
+const AboutPage = async () => {
+  const team = await getTeam();
+  const brands = await getBrands();
+  const testimonials = await getTestimonials();
+
   return (
     <section className="">
       <Headinfo
@@ -22,12 +65,12 @@ const AboutPage = () => {
       <OfferBanner />
 
       <SectionDivider title={"Meet Our Team"} />
-      <MeetOurTeam />
+      <MeetOurTeam team={team} />
 
       <SectionDivider title={"Our Customers Are Saying"} />
-      <Testimonials />
+      <Testimonials testimonials={testimonials} />
 
-      <Brands />
+      <Brands brands={brands} />
     </section>
   );
 };
