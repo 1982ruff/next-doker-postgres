@@ -29,21 +29,17 @@ const getDetailBlogs = async (id) => {
 const BlogDetailPage = async ({ params }) => {
   const blogSlug = await getDetailBlogs(params.id);
 
-  console.log(blogSlug);
-
   return (
-    <div>
-      <BlogCard
-        image={blogSlug.image}
-        title={blogSlug.title}
-        date={blogSlug.date}
-        category={blogSlug.category}
-        description={blogSlug.description}
-        likes={blogSlug.likes}
-        comments={blogSlug.comments}
-        id={blogSlug.id}
-      />
-    </div>
+    <BlogCard
+      image={blogSlug.image}
+      title={blogSlug.title}
+      date={blogSlug.date}
+      category={blogSlug.category}
+      description={blogSlug.description}
+      likes={blogSlug.likes}
+      comments={blogSlug.comments}
+      id={blogSlug.id}
+    />
   );
 };
 

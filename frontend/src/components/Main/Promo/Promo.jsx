@@ -11,7 +11,7 @@ const Promo = ({ product }) => {
         <PromoSection
           key={idx}
           title={item.title}
-          link={item.slug}
+          link={item.id}
           image={item.image}
           description={item.description}
         />
@@ -25,12 +25,16 @@ export default Promo;
 const PromoSection = ({ title, description, link, image }) => {
   return (
     <div className="grid items-center justify-center grid-cols-1 gap-4 p-8 rounded-xl bg-Lynx_White sm:grid-cols-2">
-      <Image width={500} height={500} src={image} alt={title} />
+      {image ? (
+        <Image width={500} height={500} src={image} alt={title} />
+      ) : (
+        "No Image"
+      )}
       <div className="flex space-y-6 w-[80%] items-start flex-col">
         <H4>{title}</H4>
         <P4>{description}</P4>
         <button className="text-xl underline-offset-8 hover:underline">
-          <Link href={link}>Shop Now</Link>
+          <Link href={`/product/${link}`}>Shop Now</Link>
         </button>
       </div>
     </div>

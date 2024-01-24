@@ -8,6 +8,7 @@ import ProductOfTheWeek from "@/components/Main/ProductOfTheWeek/ProductOfTheWee
 import Promo from "@/components/Main/Promo/Promo";
 import RecentBlogs from "@/components/Main/RecentBlogs/RecentBlogs";
 import SectionChair from "@/components/Main/SectionChair/SectionChair";
+import NoDBConnection from "@/components/NoDBConnection";
 
 const getCategory = async () => {
   const res = await fetch("http://localhost:3000/api/categories", {
@@ -78,43 +79,49 @@ export default async function Home() {
 
   return (
     <main className="">
-      <Slider slides={slides} />
-      <Promo product={product} />
+      {category && product && slides && brands && blogs ? (
+        <>
+          <Slider slides={slides} />
+          <Promo product={product} />
 
-      {/* Categories */}
-      <section className="px-10 text-center lg:px-20">
-        <SectionDivider title={"Categories"} />
-        <Category category={category} />
-      </section>
+          {/* Categories */}
+          <section className="px-10 text-center lg:px-20">
+            <SectionDivider title={"Categories"} />
+            <Category category={category} />
+          </section>
 
-      {/* New Products */}
-      <section className="px-10 text-center lg:px-20">
-        <SectionDivider title={"New Products"} />
-        <NewProducts product={product} />
-      </section>
+          {/* New Products */}
+          <section className="px-10 text-center lg:px-20">
+            <SectionDivider title={"New Products"} />
+            <NewProducts product={product} />
+          </section>
 
-      {/* Match Furniture Styles Banner*/}
-      <section className="px-10 text-center lg:px-20">
-        <Banner />
-      </section>
+          {/* Match Furniture Styles Banner*/}
+          <section className="px-10 text-center lg:px-20">
+            <Banner />
+          </section>
 
-      {/* Products of the week */}
-      <section className="px-10 text-center lg:px-20">
-        <SectionDivider title={"Products of the week"} />
-        <ProductOfTheWeek product={product} />
-      </section>
+          {/* Products of the week */}
+          <section className="px-10 text-center lg:px-20">
+            <SectionDivider title={"Products of the week"} />
+            <ProductOfTheWeek product={product} />
+          </section>
 
-      {/* Stylish minimal chair */}
-      <SectionChair />
+          {/* Stylish minimal chair */}
+          <SectionChair />
 
-      {/* Brands */}
-      <Brands brands={brands} />
+          {/* Brands */}
+          <Brands brands={brands} />
 
-      {/* Recent Blogs */}
-      <section className="px-20 text-center">
-        <SectionDivider title={"Recent Blogs"} />
-        <RecentBlogs blogs={blogs} />
-      </section>
+          {/* Recent Blogs */}
+          <section className="px-20 text-center">
+            <SectionDivider title={"Recent Blogs"} />
+            <RecentBlogs blogs={blogs} />
+          </section>
+        </>
+      ) : (
+        <NoDBConnection />
+      )}
     </main>
   );
 }

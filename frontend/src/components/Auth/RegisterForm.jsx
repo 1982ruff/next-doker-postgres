@@ -8,7 +8,6 @@ import H6 from "../Headings/H6";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-
 import {
   Form,
   FormControl,
@@ -22,9 +21,11 @@ import { toast } from "@/components/ui/use-toast";
 
 import * as z from "zod";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { ToastAction } from "../ui/toast";
 
 const formSchema = z.object({
-  username: z
+  name: z
     .string()
     .min(3, {
       message: "Username must be at least 3 characters.",
@@ -41,27 +42,42 @@ const formSchema = z.object({
 
 const RegisterForm = () => {
   const [checked, setChecked] = useState(false);
-
-  console.log(checked);
+  const router = useRouter();
 
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      username: "",
+      name: "",
       email: "",
       password: "",
     },
   });
 
-  function onSubmit(data) {
-    toast({
-      title: "You submitted the following values:",
-      description: (
-        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-          <code className="text-white">{JSON.stringify(data, null, 2)}</code>
-        </pre>
-      ),
+  async function onSubmit(data) {
+    const response = await fetch("/api/auth/register", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ data }),
     });
+
+    if (!response.ok) {
+      toast({
+        variant: "destructive",
+        title: "User already exist",
+        action: (
+          <ToastAction altText="Login">
+            <Link href={"/login"}>Login</Link>
+          </ToastAction>
+        ),
+      });
+    } else {
+      toast({
+        title: "User succesfully created",
+      });
+      router.push("/login");
+    }
   }
 
   return (
@@ -98,7 +114,7 @@ const RegisterForm = () => {
           >
             <FormField
               control={form.control}
-              name="username"
+              name="name"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel className="text-xl">Username</FormLabel>

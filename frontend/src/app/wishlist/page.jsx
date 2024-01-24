@@ -40,13 +40,17 @@ const WishlistCard = ({ image, title, price }) => {
   return (
     <div className="flex gap-10 p-10 shadow-gray-100 rounded-xl hover:shadow-xl">
       <div className="flex items-center justify-center rounded-xl bg-Lynx_White w-52 h-52">
-        <Image
-          width={150}
-          height={150}
-          src={image}
-          alt={title}
-          className="object-cover w-36 h-36 hover:scale-110"
-        />
+        {image ? (
+          <Image
+            width={150}
+            height={150}
+            src={image}
+            alt={title}
+            className="object-cover w-36 h-36 hover:scale-110"
+          />
+        ) : (
+          "No Image"
+        )}
       </div>
 
       <div className="flex flex-col items-start justify-center gap-3 text-start">

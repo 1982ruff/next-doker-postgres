@@ -2,12 +2,12 @@ import { NextResponse } from "next/server";
 
 // GET SINGLE PRODUCT
 export const GET = async (req, { params }) => {
-  const { slug } = params;
+  const { id } = params;
 
   try {
     const product = await prisma.product.findUnique({
       where: {
-        slug: slug,
+        id: id,
       },
     });
 

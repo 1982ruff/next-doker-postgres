@@ -29,7 +29,7 @@ const ShopPage = async () => {
         {products.map((item, idx) => (
           <ProductCard
             key={idx}
-            slug={item.slug}
+            id={item.id}
             title={item.title}
             image={item.image}
             price={item.price}

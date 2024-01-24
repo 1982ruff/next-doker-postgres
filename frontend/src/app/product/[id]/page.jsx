@@ -4,13 +4,14 @@ import H2 from "@/components/Headings/H2";
 import H5 from "@/components/Headings/H5";
 import H6 from "@/components/Headings/H6";
 import P3 from "@/components/Paragraph/P3";
+import Price from "@/components/Price";
 import ProductCard from "@/components/Product/ProductCard";
 import Quantity from "@/components/Quantity";
 import Image from "next/image";
 
 export async function generateMetadata({ params }, parent) {
-  const slug = params.slug;
-  const product = await fetch(`http://localhost:3000/api/product/${slug}`).then(
+  const id = params.id;
+  const product = await fetch(`http://localhost:3000/api/product/${id}`).then(
     (res) => res.json()
   );
   const previousImages = (await parent).openGraph?.images || [];
@@ -22,8 +23,8 @@ export async function generateMetadata({ params }, parent) {
   };
 }
 
-const getDetailProduct = async (slug) => {
-  const res = await fetch(`http://localhost:3000/api/product/${slug}`, {
+const getDetailProduct = async (id) => {
+  const res = await fetch(`http://localhost:3000/api/product/${id}`, {
     cache: "no-store",
   });
 
@@ -47,7 +48,7 @@ const getProducts = async () => {
 };
 
 const ProductDetailPage = async ({ params }) => {
-  const productSlug = await getDetailProduct(params.slug);
+  const productId = await getDetailProduct(params.id);
   const product = await getProducts();
 
   return (
@@ -57,19 +58,19 @@ const ProductDetailPage = async ({ params }) => {
         <div className="flex flex-col gap-11">
           {/* Breadcrumbs */}
           <div className="flex">
-            <H6>{productSlug.title}</H6>
+            <H6>{productId.title}</H6>
           </div>
 
           {/* Main title */}
-          <H2>{productSlug.title}</H2>
+          <H2>{productId.title}</H2>
 
           {/* Price & Rating */}
           <div className="flex justify-between">
             {/* Price */}
             <div className="flex gap-3">
-              <H5 textColor={"#644321"}>${productSlug.price}</H5>
+              <H5 textColor={"#644321"}>${productId.price}</H5>
               <h5 className="font-normal text-2xl text-Basalt_grey/40 line-through leading-[140%]">
-                ${productSlug.priceOld}
+                ${productId.priceOld}
               </h5>
             </div>
 
@@ -97,22 +98,19 @@ const ProductDetailPage = async ({ params }) => {
           </div>
 
           {/* Description */}
-          <P3>{productSlug.description}</P3>
+          <P3>{productId.description}</P3>
 
           {/* Quantity and Button */}
-          <div className="flex gap-10 ">
-            <Quantity />
-            <Button link={"/"}>Add To Cart</Button>
-          </div>
+          <Price product={productId} />
 
           {/* Category */}
-          <P3>Category: {productSlug.category}</P3>
+          <P3>Category: {productId.category}</P3>
 
           {/* Tags */}
-          <P3>Tag: {productSlug.tags}</P3>
+          <P3>Tag: {productId.tags}</P3>
 
           {/* Shipping */}
-          <P3 textColor={"#000"}>Shipping: {productSlug.shipping}</P3>
+          <P3 textColor={"#000"}>Shipping: {productId.shipping}</P3>
 
           {/* Add to wishlist */}
           <button className="flex items-center gap-3">
@@ -135,45 +133,67 @@ const ProductDetailPage = async ({ params }) => {
         {/* Image & Thumbs */}
         <div className="flex flex-col">
           <div className=" flex w-[550px] h-[550px] flex-col gap-4 justify-center items-center rounded-xl bg-Lynx_White">
-            <Image
-              width={200}
-              height={200}
-              src={productSlug.image}
-              alt={productSlug.title}
-              className="scale-150 "
-            />
+            {productId.image ? (
+              <Image
+                width={200}
+                height={200}
+                src={productId.image}
+                alt={productId.title}
+                className="scale-150 "
+              />
+            ) : (
+              "No Image"
+            )}
           </div>
 
           <div className="flex mt-6 gap-14">
-            <Image
-              width={200}
-              height={200}
-              src={productSlug.image}
-              alt={productSlug.title}
-              className="border rounded-lg cursor-pointer size-24 hover:border-2"
-            />
+            {productId.image ? (
+              <Image
+                width={200}
+                height={200}
+                src={productId.image}
+                alt={productId.title}
+                className="border rounded-lg cursor-pointer size-24 hover:border-2"
+              />
+            ) : (
+              "No Image"
+            )}
 
-            <Image
-              width={200}
-              height={200}
-              src={productSlug.image}
-              alt={productSlug.title}
-              className="border rounded-lg cursor-pointer size-24 hover:border-2"
-            />
-            <Image
-              width={200}
-              height={200}
-              src={productSlug.image}
-              alt={productSlug.title}
-              className="border rounded-lg cursor-pointer size-24 hover:border-2"
-            />
-            <Image
-              width={200}
-              height={200}
-              src={productSlug.image}
-              alt={productSlug.title}
-              className="border rounded-lg cursor-pointer size-24 hover:border-2"
-            />
+            {productId.image ? (
+              <Image
+                width={200}
+                height={200}
+                src={productId.image}
+                alt={productId.title}
+                className="border rounded-lg cursor-pointer size-24 hover:border-2"
+              />
+            ) : (
+              "No Image"
+            )}
+
+            {productId.image ? (
+              <Image
+                width={200}
+                height={200}
+                src={productId.image}
+                alt={productId.title}
+                className="border rounded-lg cursor-pointer size-24 hover:border-2"
+              />
+            ) : (
+              "No Image"
+            )}
+
+            {productId.image ? (
+              <Image
+                width={200}
+                height={200}
+                src={productId.image}
+                alt={productId.title}
+                className="border rounded-lg cursor-pointer size-24 hover:border-2"
+              />
+            ) : (
+              "No Image"
+            )}
           </div>
         </div>
       </div>
@@ -183,7 +203,7 @@ const ProductDetailPage = async ({ params }) => {
         {product.map((item, idx) => (
           <ProductCard
             key={idx}
-            slug={item.slug}
+            id={item.id}
             title={item.title}
             image={item.image}
             price={item.price}

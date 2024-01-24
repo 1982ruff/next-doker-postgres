@@ -3,9 +3,25 @@ import Image from "next/image";
 import H6 from "../Headings/H6";
 import { useState } from "react";
 import Link from "next/link";
+import { useCartStore } from "@/utils/store";
+import { toast } from "../ui/use-toast";
 
-const ProductCard = ({ title, image, price, slug }) => {
+const ProductCard = ({ title, image, price, id }) => {
   const [show, setShow] = useState(false);
+  const { addToCart } = useCartStore();
+
+  const handleCart = () => {
+    addToCart({
+      id: id,
+      title: title,
+      image: image,
+      price: price,
+      quantity: 1,
+    });
+    toast({
+      title: `${title} added to the cart!`,
+    });
+  };
 
   return (
     <div
@@ -13,20 +29,24 @@ const ProductCard = ({ title, image, price, slug }) => {
       onMouseLeave={() => setShow(false)}
       className="relative flex flex-col items-center justify-center cursor-pointer gap-y-3 rounded-xl "
     >
-      <Link href={`/product/${slug}`}>
+      <Link href={`/product/${id}`}>
         <div className="flex items-center justify-center w-[350px] h-[350px] rounded-lg bg-Lynx_White">
-          <Image
-            width={250}
-            height={250}
-            src={image}
-            alt={title}
-            className="transition-transform duration-150 ease-in-out scale-75 hover:scale-90"
-          />
+          {image ? (
+            <Image
+              width={250}
+              height={250}
+              src={image}
+              alt={title}
+              className="transition-transform duration-150 ease-in-out scale-75 hover:scale-90"
+            />
+          ) : (
+            "No Image"
+          )}
         </div>
       </Link>
       <div className="px-4 mt-2 text-start place-self-start">
         <H6>
-          <Link href={`/product/${slug}`}>{title}</Link>
+          <Link href={`/product/${id}`}>{title}</Link>
         </H6>
         <h6 className="text-xl font-bold text-Satoimo_Brown">$ {price} </h6>
       </div>
@@ -62,7 +82,10 @@ const ProductCard = ({ title, image, price, slug }) => {
               />
             </svg>
           </button>
-          <button className="absolute flex items-center justify-center w-10 h-10 rounded-lg bottom-24 lg:bottom-20 group right-4 bg-Satoimo_Brown">
+          <button
+            onClick={handleCart}
+            className="absolute flex items-center justify-center w-10 h-10 rounded-lg bottom-24 lg:bottom-20 group right-4 bg-Satoimo_Brown"
+          >
             <svg
               width="24"
               height="24"

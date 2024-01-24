@@ -7,11 +7,7 @@ export const GET = async (req) => {
   const category = searchParams.get("category");
 
   try {
-    const product = await prisma.product.findMany({
-      where: {
-        ...(category ? { catSlug: category } : { isNew: true }),
-      },
-    });
+    const product = await prisma.product.findMany();
 
     return new NextResponse(JSON.stringify(product), { status: 200 });
   } catch (error) {
@@ -24,4 +20,18 @@ export const GET = async (req) => {
   }
 };
 
-export const POST = async () => {};
+export const POST = async (req) => {
+  try {
+    const body = await req.json();
+    const product = await prisma.product.create({
+      data: body,
+    });
+    return new NextResponse(JSON.stringify(product), { status: 201 });
+  } catch (err) {
+    console.log(err);
+    return new NextResponse(
+      JSON.stringify({ message: "Something went wrong!" }),
+      { status: 500 }
+    );
+  }
+};

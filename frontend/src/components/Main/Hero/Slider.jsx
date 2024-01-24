@@ -32,7 +32,7 @@ const Slider = ({ slides }) => {
             <div className="lg:w-[652px]">
               <H1 textColor="#000">{item.title}</H1>
             </div>
-            <Button link={item.slug}>Shop now</Button>
+            <Button link={item.id}>Shop now</Button>
           </div>
         </SwiperSlide>
       ))}
